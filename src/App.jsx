@@ -15,6 +15,16 @@ function App() {
       <Button intent="secondary">Secondary Button</Button>
       <Button intent="secondary">Secondary Button</Button>
       <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
     </div>
     </>
   );
