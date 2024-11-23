@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inknut: ['"Inknut Antiqua"', 'serif'], // Add custom font here
+        grover: ['"Irish Grover"', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }
