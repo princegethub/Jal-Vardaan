@@ -12,6 +12,9 @@ function App() {
       <div className="p-4">
       <Button intent="primary">Primary Button</Button>
       <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
+      <Button intent="secondary">Secondary Button</Button>
     </div>
     </>
   );
