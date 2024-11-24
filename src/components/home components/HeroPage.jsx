@@ -1,9 +1,10 @@
 import React from "react";
 import Hero from "../../assets/hero.svg";
 
+
 function HeroPage() {
   return (
-    <div className="w-[100vw] h-[60vh] flex items-center justify-center bg-gradient-to-b from-[#4EB4F8] to-[#FFFFFF]">
+    <div className=" h-[60vh] flex items-center justify-center bg-gradient-to-b from-[#4EB4F8] to-[#FFFFFF]">
       {/* Main Content */}
       <div className="container w-[90%] mx-auto flex flex-col sm:flex-row items-center justify-between px-6">
         {/* Left Section */}
