@@ -6,6 +6,7 @@ import Button from "./components/ui/Button";
 import TopHeader from "./components/home components/topHeader";
 
 import Navbar from "./components/home components/Navbar";
+import NavbarPHED from "./components/PHED Components/NavbarPHED";
 import HeroPage from "./components/home components/HeroPage";
 
 import Archivement from "./components/home components/archivement";
@@ -18,6 +19,7 @@ import ZigZag from "./components/home components/ZigZag";
 import Footer from "./components/home components/Footer";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
+import SlickSlider from "./components/PHED Components/Slider";
 
 function App() {
 
@@ -27,7 +29,8 @@ function App() {
 
 
     
-    <Login/>
+    <NavbarPHED/>
+    <SlickSlider/>
     {/* <TopHeader/>
   
 

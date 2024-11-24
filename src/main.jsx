@@ -16,12 +16,16 @@ import { RouterProvider } from "react-router-dom";
 import Public_Layout from "./components/home components/Public_Layout.jsx";
 import BetterTomorrow from "./components/home components/BetterTommorow.jsx";
 import Footer from "./components/home components/Footer.jsx";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Public Layout Route */}
-      <Route path="/" element={<Public_Layout />}/>   
+      {/* <Route path="/" element={<Public_Layout />}/>    */}
+      <Route path="/" element={<App />}/>   
 
       {/* Main Application Layout */}
       <Route path="/" element={<Layout />}>
