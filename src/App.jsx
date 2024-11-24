@@ -12,14 +12,14 @@ import Navbar from "./components/home components/Navbar";
 import HeroPage from "./components/home components/HeroPage";
 import Archivement from "./components/home components/archivement";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+// import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
 
 
   return (
     <>
-   
+
       <TopHeader />
       <Navbar />
       <HeroPage />
