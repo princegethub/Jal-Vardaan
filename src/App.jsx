@@ -32,8 +32,8 @@ function App() {
 
     <Navbar/>
     <HeroPage/>
-      <Archivement />
     <About/>
+      <Archivement />
     <BetterTommorow/>
     <ZigZag/>
     <Footer/>

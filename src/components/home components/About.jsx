@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="w-full  bg-[#EAF7FF] bg-opacity-62 flex items-center justify-center">
+    <div className="w-full mt-16   bg-opacity-62 flex items-center justify-center">
       {/* Content Container */}
       <div className="w-[90%] mt-5 sm:w-[80%] text-center p-6">
         {/* Title */}
