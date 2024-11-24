@@ -3,6 +3,22 @@ import Button from "../ui/Button"; // Make sure shadcn-ui is installed
 import Logo from "../../assets/Logo.png";
 
 function Navbar() {
+
+  const scrollToAbout = (differentSection)=>
+  {
+
+    const scrollSection = document.getElementById(differentSection);
+    if(scrollSection)
+    {
+      window.scrollTo({
+        top:scrollSection.offsetTop,
+        behavior:'smooth',
+      })
+    }
+  }
+
+
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -57,9 +73,9 @@ function Navbar() {
         >
           <ul className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 text-sm font-medium text-gray-700">
             <li className="hover:text-blue-600 cursor-pointer">Home</li>
-            <li className="hover:text-blue-600 cursor-pointer">About</li>
-            <li className="hover:text-blue-600 cursor-pointer">Our Vision</li>
-            <li className="hover:text-blue-600 cursor-pointer">Contact</li>
+            <li className="hover:text-blue-600 cursor-pointer" onClick={()=>scrollToAbout('about-section')}>About</li>
+            <li className="hover:text-blue-600 cursor-pointer" onClick={()=>scrollToAbout('scrollTovision')}>Our Vision</li>
+            <li className="hover:text-blue-600 cursor-pointer" onClick={()=>scrollToAbout('scrollToFooter')} >Contact</li>
           </ul>
           <Button className="bg-blue-500 text-white px-4 py-2 rounded-md">
             Logout

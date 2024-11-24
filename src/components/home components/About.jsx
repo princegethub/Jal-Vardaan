@@ -6,10 +6,10 @@ function About() {
       {/* Content Container */}
       <div className="w-[90%] mt-5 sm:w-[80%] text-center p-6">
         {/* Title */}
-        <h1 className="text-[30px] font-mulish text-[#406B95] font-bold mb-4">
+        <h1 className="text-[30px] font-mulish text-[#406B95] font-bold mb-4" id="about-section">
           About Jal Vardaan
         </h1>
-        
+
         {/* Description */}
         <p className="text-gray-700 font-mulish mb-5 leading-relaxed">
           Water is the essence of life, and ensuring its availability is one of

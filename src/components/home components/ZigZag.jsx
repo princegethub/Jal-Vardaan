@@ -4,7 +4,7 @@ import ZIGZAG1 from "../../assets/ZigZag1.jpg";
 
 function ZigZag() {
   return (
-    <div className="w-full bg-[#EAF7FF] py-10 flex flex-col items-center justify-center">
+    <div className="w-full bg-[#EAF7FF] py-10 flex flex-col items-center justify-center" id="scrollTovision">
       {/* Container */}
       <div className="w-[90%] lg:w-[80%] text-center">
         {/* ZigZag Sections */}

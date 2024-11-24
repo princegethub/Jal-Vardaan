@@ -21,7 +21,7 @@ function Footer() {
           <img className="h-16" src={MyGov} alt="My Gov" />
         </div>
       </div>
-      <div className="bg-[#F9F9FF] py-10">
+      <div className="bg-[#F9F9FF] py-10"  id="scrollToFooter">
         {/* Main Footer Content */}
         <div className="w-[90%] mx-auto flex flex-wrap justify-between text-gray-700">
           {/* About Section */}
