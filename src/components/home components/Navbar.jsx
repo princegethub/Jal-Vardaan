@@ -10,7 +10,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-xl">
+    <nav className="bg-white shadow-xl h-[10vh] flex justify-center">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         {/* Left Side - Logo and Titles */}
         <div className="flex items-center gap-2">

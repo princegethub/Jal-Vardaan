@@ -12,7 +12,7 @@ export default function TopHeader() {
     // console.log(nationalsymbol);
   return (
     <>
-    <div className='bg-[#d0e1fb] h-16  display: flex  items-center justify-between p-3'>
+    <div className='bg-[#d0e1fb] h-16 hidden  sm:flex  items-center justify-between p-3'>
       
     <div className='  display: flex  items-center  gap-3.5'>
         <img src={symbol} alt="" />
