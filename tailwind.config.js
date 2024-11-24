@@ -6,9 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+
+      colors:{
+       topheadercolor:"#d0e1fb"
+
       fontFamily: {
         inknut: ['"Inknut Antiqua"', 'serif'], // Add custom font here
         grover: ['"Irish Grover"', 'cursive'],
+
       },
     },
   },
