@@ -15,6 +15,10 @@ export default {
         grover: ['"Irish Grover"', 'cursive'],
 
       },
+      fontSize: {
+        'heading': '2rem',
+
+      },
     },
   },
   plugins: [],

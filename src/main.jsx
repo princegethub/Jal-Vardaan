@@ -5,11 +5,15 @@ import App from "./App.jsx";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    ,
-  </StrictMode>
-);
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router";
+
+
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<App />} />
+  </Routes>
+</BrowserRouter>
+)
