@@ -17,6 +17,7 @@ import BetterTommorow from "./components/home components/BetterTommorow";
 import ZigZag from "./components/home components/ZigZag";
 import Footer from "./components/home components/Footer";
 import { Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
 
 function App() {
 
@@ -26,8 +27,8 @@ function App() {
 
 
     
-
-    <TopHeader/>
+    <Login/>
+    {/* <TopHeader/>
   
 
     <Navbar/>
@@ -36,7 +37,7 @@ function App() {
       <Archivement />
     <BetterTommorow/>
     <ZigZag/>
-    <Footer/>
+    <Footer/> */}
 
     </>
   );
