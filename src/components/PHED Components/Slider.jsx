@@ -18,7 +18,7 @@ function SlickSlider() {
   };
 
   return (
-    <div className="relative w-full h-[250px] overflow-hidden">
+    <div className="relative w-full h-[17vh] overflow-hidden">
       <Slider {...settings}>
         {/* Slide 1 */}
         <div>
@@ -28,11 +28,11 @@ function SlickSlider() {
               alt="Banner 1"
               className="w-full h-full object-cover" // Full width and height, with cover aspect
             />
-            <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-xl font-bold">
-              Banner 1
-            </p>
+          
           </div>
         </div>
+
+
 
         {/* Slide 2 */}
         <div>
@@ -42,9 +42,7 @@ function SlickSlider() {
               alt="Banner 2"
               className="w-full h-full object-cover" 
             />
-            <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-xl font-bold">
-              Banner 2
-            </p>
+           
           </div>
         </div>
 
@@ -56,9 +54,7 @@ function SlickSlider() {
               alt="Banner 3"
               className="w-full h-full object-cover" 
             />
-            <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-xl font-bold">
-              Banner 3
-            </p>
+         
           </div>
         </div>
       </Slider>

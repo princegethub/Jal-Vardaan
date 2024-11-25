@@ -38,7 +38,7 @@ function Navbar() {
         isSticky
           ? "fixed top-0 left-0 w-full bg-white shadow-md z-50"
           : "sticky"
-      } bg-white shadow-xl h-[10vh] flex justify-center transition-all duration-300`}
+      } bg-white shadow-xl z-10 h-[10vh] flex justify-center transition-all duration-300`}
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         {/* Left Side - Logo and Titles */}
