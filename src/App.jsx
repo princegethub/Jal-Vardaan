@@ -23,6 +23,8 @@ import SlickSlider from "./components/PHED Components/Slider";
 import OurService from "./components/PHED Components/OurService";
 import Footer_PHED from "./components/PHED Components/Footer_PHED.JSX";
 import UserCard from "./components/PHED Components/UserCard";
+import ManageGps_List from "./components/PHED Components/ManageGps_List";
+import UpdateGps from "./components/PHED Components/UpdateGps";
 
 function App() {
 
@@ -33,7 +35,7 @@ function App() {
 
     
     <NavbarPHED/>
-    <SlickSlider/>
+    {/* <SlickSlider/> */}
     {/* <div className="h-[17vh] py-5 bg-gradient-to-br from-[#3B82F6] via-[#60A5FA] to-[#1E3A8A] flex items-center justify-center">
       <UserCard
         name="Bhajanlal"
@@ -41,7 +43,12 @@ function App() {
         imageSrc="https://upload.wikimedia.org/wikipedia/commons/9/9c/Bhajan_Lal_Sharma_and_deputies_meets_VP_of_India.jpg" // Replace with actual image URL
       />
     </div> */}
-    <OurService/>
+    {/* <OurService/> */}
+
+
+      <ManageGps_List/>
+      {/* <UpdateGps/> */}
+
     <Footer_PHED/>
     {/* <TopHeader/>
   
