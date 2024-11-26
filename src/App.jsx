@@ -27,6 +27,8 @@ import ManageGps_List from "./components/PHED Components/ManageGps_List";
 import UpdateGps from "./components/PHED Components/UpdateGps";
 import AssestInventory from "./components/PHED Components/AssestInventory";
 import AlertPage from "./components/PHED Components/AleartPage";
+import ManageGpPage from "./components/PHED Components/ManageGpPage";
+import GpAnnouncement from "./components/PHED Components/GpAnnouncement";
 
 function App() {
 
@@ -48,12 +50,13 @@ function App() {
     {/* <OurService/> */}
 
 
-      {/* <ManageGps_List/> */}
       {/* <UpdateGps/> */}
       {/* <Assest/> */}
       {/* <AssestInventory /> */}
 
-      <AlertPage/>
+      {/* <AlertPage/> */}
+      {/* <ManageGpPage/> */}
+      <GpAnnouncement/>
     <Footer_PHED/>
     {/* <TopHeader/>
   
