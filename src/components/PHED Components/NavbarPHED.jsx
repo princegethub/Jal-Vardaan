@@ -100,13 +100,13 @@ function Navbar() {
           } absolute top-16 left-0 w-full flex-col items-center space-y-4 py-4 sm:relative sm:top-0 sm:left-0 sm:w-auto sm:flex sm:flex-row sm:space-y-0 sm:space-x-6 sm:bg-transparent`}
         >
           <ul className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 text-sm font-medium text-gray-700">
-            <Link to="/" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/phed" className="hover:text-blue-600 cursor-pointer">
               Home
             </Link>
-            <Link to="/about" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/phed/assestinventory" className="hover:text-blue-600 cursor-pointer">
             Inoventory
             </Link>
-            <Link to="/contact" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/phed/alerts" className="hover:text-blue-600 cursor-pointer">
               Notification
             </Link>
           </ul>
@@ -130,16 +130,17 @@ function Navbar() {
                 <ul className="text-sm text-gray-700">
                   <li>
                     <Link
-                      to="/my-account"
+                      to="/phed/profile"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       My Account
                     </Link>
                   </li>
                   <li>
+                    <Link to="/login">
                     <button className="block px-4 py-2 w-full text-left hover:bg-gray-100">
                       Logout
-                    </button>
+                    </button></Link>
                   </li>
                 </ul>
               </div>

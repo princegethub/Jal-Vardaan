@@ -4,9 +4,11 @@ import Form from "./ManageGpFrom";
 import List from "./ManageGpList";
 import Image1 from "../../assets/PHED/addlist.png";
 import Image2 from "../../assets/PHED/List.png";
+import { useNavigate } from "react-router";
 
-const GpAnnouncementPage = () => {
+const ManageGpsPage = () => {
   const [isAdding, setIsAdding] = useState(false);
+  const navigate = useNavigate();
   const [gpData, setGpData] = useState([
     "Ferozpur Jhirka",
     "Nagina",
@@ -24,7 +26,10 @@ const GpAnnouncementPage = () => {
     setIsAdding(false);
   };
 
-  const handleEditGp = (index) => alert(`Edit GP at index ${index}`);
+  const handleEditGp = (index) => {
+    // handle edit functionality here
+    navigate(`/phed/managegp/${index}`)
+  };
   const handleDeleteGp = (index) => {
     setGpData(gpData.filter((_, i) => i !== index));
   };
@@ -59,4 +64,4 @@ const GpAnnouncementPage = () => {
   );
 };
 
-export default GpAnnouncementPage;
+export default ManageGpsPage;

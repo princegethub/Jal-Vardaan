@@ -1,12 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import Image1 from "../../assets/PHED/addlist.png";
-// import Image1 from "../../assets/PHED/List.png";
-
+import { Link, useNavigate } from "react-router-dom"; // Use correct "react-router-dom"
 
 function UpdateGps() {
+  const navigate = useNavigate();
+
+  // State to manage form values
+  const [formData, setFormData] = useState({
+    gpName: "",
+    sarpanchName: "",
+    mobileNumber: "",
+    lgdCode: "",
+    authId: "",
+  });
+
+  // State to manage validation errors
+  const [errors, setErrors] = useState({});
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Set errors if validation fails
+      return;
+    }
+    // Perform the update logic here (e.g., API call)
+    console.log("Form submitted successfully:", formData);
+    navigate("/phed/managegp"); // Redirect on successful submission
+  };
+
+  // Validate form fields
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.gpName) newErrors.gpName = "Gram Panchayat Name is required";
+    if (!formData.sarpanchName)
+      newErrors.sarpanchName = "Sarpanch Name is required";
+    if (!formData.mobileNumber)
+      newErrors.mobileNumber = "Mobile Number is required";
+    else if (!/^\d{10}$/.test(formData.mobileNumber))
+      newErrors.mobileNumber = "Enter a valid 10-digit Mobile Number";
+    if (!formData.lgdCode) newErrors.lgdCode = "LGD Code is required";
+    if (!formData.authId) newErrors.authId = "Auth ID is required";
+    return newErrors;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white overflow-x-hidden">
-      {/* // Add Gram Panchayat Form View */}
       <div
         className="container mx-auto py-10 flex flex-col lg:flex-row items-center lg:items-start gap-10"
         style={{ maxWidth: "90%" }}
@@ -25,7 +71,7 @@ function UpdateGps() {
           <h2 className="text-xl md:text-2xl font-bold text-blue-600 mb-6">
             Update Gram Panchayat
           </h2>
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {[
               {
                 label: "Gram Panchayat Name",
@@ -64,8 +110,17 @@ function UpdateGps() {
                   type="text"
                   id={input.id}
                   placeholder={input.placeholder}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  value={formData[input.id]} // Controlled input
+                  onChange={handleChange}
+                  className={`w-full p-3 border ${
+                    errors[input.id] ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none`}
                 />
+                {errors[input.id] && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors[input.id]}
+                  </p>
+                )}
               </div>
             ))}
             <div className="flex justify-between items-center">
@@ -75,13 +130,14 @@ function UpdateGps() {
               >
                 Update
               </button>
-              <button
-                type="button"
-                // onClick={handleBackClick}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded-lg"
-              >
-                Back
-              </button>
+              <Link to="/phed/managegp">
+                <button
+                  type="button"
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded-lg"
+                >
+                  Back
+                </button>
+              </Link>
             </div>
           </form>
         </div>
