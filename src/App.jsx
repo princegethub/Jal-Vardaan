@@ -25,6 +25,8 @@ import Footer_PHED from "./components/PHED Components/Footer_PHED.JSX";
 import UserCard from "./components/PHED Components/UserCard";
 import ManageGps_List from "./components/PHED Components/ManageGps_List";
 import UpdateGps from "./components/PHED Components/UpdateGps";
+import AssestInventory from "./components/PHED Components/AssestInventory";
+import AlertPage from "./components/PHED Components/AleartPage";
 
 function App() {
 
@@ -46,9 +48,12 @@ function App() {
     {/* <OurService/> */}
 
 
-      <ManageGps_List/>
+      {/* <ManageGps_List/> */}
       {/* <UpdateGps/> */}
+      {/* <Assest/> */}
+      {/* <AssestInventory /> */}
 
+      <AlertPage/>
     <Footer_PHED/>
     {/* <TopHeader/>
   
