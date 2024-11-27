@@ -25,43 +25,39 @@ function Dashboard_Gps() {
     {
       text: "Manage Consumer",
       imageSrc: ManageGp,
-      route: "/gps/manageconsumer", // Route for Manage GPs
+      route: "/gp/manageconsumer", // Route for Manage GPs
     },
     {
       text: "Asset Overview",
       imageSrc: Asset,
-      route: "/gps/assest", // Route for Asset Inventory
+      route: "/gp/assest", // Route for Asset Inventory
     },
     {
       text: "Push Notification",
       imageSrc: PushNotification,
-      route: "/gps/pushnotification", // Route for Asset Inventory
+      route: "/gp/notification", // Route for Asset Inventory
     },
-    {
-      text: "Payment",
-      imageSrc: Payment,
-      route: "/gps/payment", // Route for Asset Inventory
-    },
+    // {
+    //   text: "Payment",
+    //   imageSrc: Payment,
+    //   route: "/gp/payment", // Route for Asset Inventory
+    // },
     {
       text: "View Complaint",
       imageSrc: AlretIcon,
-      route: "/gps/alerts", // Route for Alerts
+      route: "/gp/aleart", // Route for Alerts
     },
     {
       text: "Request Fund",
       imageSrc: RqstFund,
-      route: "/gps/rqstfund", // Route for Asset Inventory
+      route: "/gp/requestfund", // Route for Asset Inventory
     },
   
+    
     {
-      text: "Manage IOT",
-      imageSrc: ManageIOT,
-      route: "/gps/manageiot", // Route for GP Announcements
-    },
-    {
-      text: "Financial Overview",
+      text: "Submit Receipt To PHED",
       imageSrc: Finance,
-      route: "/gps/finance", // Route for Financial Overview
+      route: "/gp/receipt", // Route for Financial Overview
     },
   ];
 

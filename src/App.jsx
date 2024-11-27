@@ -6,6 +6,7 @@ import ManageConsumer from './components/GPS Components/MangeConsumerPage'
 import PushNotificationPage from './components/GPS Components/PushNotificationPage'
 import RqstFundPage from './components/GPS Components/RqstFundPage'
 import ReceiptsPage from './components/GPS Components/ReceiptsPage'
+import GPAlertPage from './components/GPS Components/GPAlertPage'
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       {/* <ManageConsumer/> */}
       {/* <PushNotificationPage/> */}
       {/* <RqstFundPage/> */}
-      <ReceiptsPage/>
+      {/* <ReceiptsPage/> */}
+      <GPAlertPage/>
       <Footer_PHED/>
     </div>
   )

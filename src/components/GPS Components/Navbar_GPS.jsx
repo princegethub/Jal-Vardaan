@@ -100,16 +100,16 @@ function Navbar() {
           } absolute top-16 left-0 w-full flex-col items-center space-y-4 py-4 sm:relative sm:top-0 sm:left-0 sm:w-auto sm:flex sm:flex-row sm:space-y-0 sm:space-x-6 sm:bg-transparent`}
         >
           <ul className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 text-sm font-medium text-gray-700">
-            <Link to="/gps" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/gp" className="hover:text-blue-600 cursor-pointer">
               Home
             </Link>
-            <Link to="/gps/assestinventory" className="hover:text-blue-600 cursor-pointer">
-            Inoventory
+            <Link to="/gp/assest" className="hover:text-blue-600 cursor-pointer">
+            Assest
             </Link>
-            <Link to="/gps/alerts" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/gp/alerts" className="hover:text-blue-600 cursor-pointer">
               GIS
             </Link>
-            <Link to="/gps/complaints" className="hover:text-blue-600 cursor-pointer">
+            <Link to="/gp/notification" className="hover:text-blue-600 cursor-pointer">
               Complaints
             </Link>
           </ul>
@@ -133,7 +133,7 @@ function Navbar() {
                 <ul className="text-sm text-gray-700">
                   <li>
                     <Link
-                      to="/gps/profile"
+                      to="/profile"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       My Account
