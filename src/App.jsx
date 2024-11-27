@@ -4,6 +4,8 @@ import Footer_PHED from './components/FooterLoginKeBaadWala'
 import Dashboard_Gps from './components/GPS Components/Dashboard_Gps'
 import ManageConsumer from './components/GPS Components/MangeConsumerPage'
 import PushNotificationPage from './components/GPS Components/PushNotificationPage'
+import RqstFundPage from './components/GPS Components/RqstFundPage'
+import ReceiptsPage from './components/GPS Components/ReceiptsPage'
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
       <Navbar/>
       {/* <Dashboard_Gps/> */}
       {/* <ManageConsumer/> */}
-      <PushNotificationPage/>
+      {/* <PushNotificationPage/> */}
+      {/* <RqstFundPage/> */}
+      <ReceiptsPage/>
       <Footer_PHED/>
     </div>
   )
