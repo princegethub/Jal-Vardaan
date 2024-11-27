@@ -31,14 +31,16 @@ import PageNotFound from "./components/PageNotFound.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path="/" element={<App />} />
+
       {/* Public Layout Route */}
-      <Route path="/" element={<Public_Layout />} />
+      {/* <Route path="/" element={<Public_Layout />} />
       <Route path="/" element={<Layout />}>
         <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
         <Route path="vision" element={<ZigZag />} />
         <Route path="contact" element={<BetterTomorrow />} />
-      </Route>
+      </Route> */}
 
       <Route path="/phed" element={<PhedLayout />}>
         <Route index  element={<Dashboard_PHED />} />

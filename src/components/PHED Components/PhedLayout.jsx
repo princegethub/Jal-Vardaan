@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./NavbarPHED";
 import { Outlet } from "react-router";
-import Footer_PHED from "../PHED Components/Footer_PHED";
+import Footer_PHED from "../FooterLoginKeBaadWala";
 
 function PhedLayout() {
   return (
