@@ -61,7 +61,7 @@ const ConsumerDetails = ({ consumer, mode, onBack, onSubmit }) => {
                 onChange={handleInputChange}
                 readOnly={mode === 'view'}
                 className={`w-full border border-gray-300 rounded p-2 ${
-                  mode === 'view' ? 'cursor-not-allowed' : ''
+                  mode === 'view' ? 'cursor-not-allowed focus:outline-none' : ''
                 }`}
               />
             </div>
