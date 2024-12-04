@@ -33,3 +33,18 @@
 .custom-scrollbar::-webkit-scrollbar:active {
   opacity: 1; /* Keep the scrollbar visible when active */
 }
+/* Custom CSS for Toaster */
+.toaster {
+  background-color: blue !important; /* Default background */
+  color: white !important; /* Default text color */
+}
+
+.toaster-success {
+  background-color: green !important; /* Success background */
+  color: white !important; /* Success text color */
+}
+
+.toaster-error {
+  background-color: red !important; /* Error background */
+  color: white !important; /* Error text color */
+}

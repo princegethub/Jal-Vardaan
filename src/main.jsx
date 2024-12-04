@@ -1,7 +1,10 @@
 import { StrictMode } from "react";
+import { Toaster } from 'sonner';
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { Provider } from "react-redux";
+import store from './app/store.js';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -35,7 +38,7 @@ import ReceiptsPage from "./components/GPS Components/ReceiptsPage.jsx";
 import GPAlertPage from "./components/GPS Components/GPAlertPage.jsx";
 import RqstFundPage from "./components/GPS Components/RqstFundPage.jsx";
 import Assest_GP from "./components/GPS Components/Assest_GP.jsx";
-
+import "./App.css"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -79,6 +82,16 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <Toaster
+  className="toaster"
+  successClassName="toaster-success"
+  errorClassName="toaster-error"
+/>
+
+
+
+    </Provider>
   </StrictMode>
 );
