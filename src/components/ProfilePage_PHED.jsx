@@ -1,6 +1,15 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+// import { useLoginMutation } from "../features/api/phedApi";
+import { useLoginMutation } from "../features/api/authApi";
+
 
 const ProfilePage_PHED = () => {
+
+  const { data: logindata, error, isLoading } = useLoginMutation();
+  
+  const user = useSelector((state) => state.auth.user);
+  const isAuthenticate = useSelector((state) => state.auth.isAuthenticate);
   
   const [profile, setProfile] = useState({
     name: "Bhajanlal",
@@ -42,6 +51,8 @@ const ProfilePage_PHED = () => {
     }
   };
 
+console.log("dataaa",logindata);
+
   return (
     <div className="h-auto  bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white flex flex-col items-center py-16">
       {/* Profile Header */}
@@ -53,7 +64,9 @@ const ProfilePage_PHED = () => {
             className="w-20 h-20 rounded-full shadow-lg border border-gray-300"
           />
           <div>
-            <h1 className="text-xl font-bold text-blue-600">Hi! {profile.name}</h1>
+            <h1 className="text-xl font-bold text-blue-600">
+              Hi! {profile.name}
+            </h1>
             <p className="text-gray-600">ID: {profile.id}</p>
             <p className="text-gray-600">ROLE: {profile.role}</p>
           </div>
@@ -174,4 +187,3 @@ const ProfilePage_PHED = () => {
 };
 
 export default ProfilePage_PHED;
-

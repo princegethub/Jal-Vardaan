@@ -37,14 +37,13 @@ function Login() {
     e.preventDefault(); // Prevent page reload
     try {
       const result = await login(inputData).unwrap(); // Use `.unwrap()` for handling results
-  
-
-     
-
+      
     } catch (err) {
+      console.log('inputData: ', inputData);
       console.error("Login failed:", err);
     }
   };
+  
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -132,8 +131,8 @@ function Login() {
                     Select Your Role
                   </option>
                   <option value="PHED">PHED</option>
-                  <option value="Gram Panchyat">Gram Panchyat</option>
-                  <option value="User">User</option>
+                  <option value="GP">Gram Panchyat</option>
+                  <option value="USER">User</option>
                 </select>
               </div>
 

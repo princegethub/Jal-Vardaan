@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Illustration from "./Illustration";
 import Form from "./ManageGpFrom";
+import { useSelector } from "react-redux";
 import List from "./ManageGpList";
 import Image1 from "../../assets/PHED/addlist.png";
 import Image2 from "../../assets/PHED/List.png";
 import { useNavigate } from "react-router";
+import { useGpListFetchQuery } from "../../features/api/phedApi";
 
 const ManageGpsPage = () => {
+  const { data: gpList, error, isLoading } = useGpListFetchQuery();
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
-  const [gpData, setGpData] = useState([
-    "Ferozpur Jhirka",
-    "Nagina",
-    "Agon",
-    "Rawil",
-    "Village 5",
-    "Village 6",
-    "Village 7",
-  ]);
+
+  
+
+  // Extract names from gpList data and store them in a separate array
+
+  const extractedGpList = gpList?.data?.map((gp) => gp) || [];
+
+  console.log('extractedGpList: ', extractedGpList);
+
+ 
 
   const handleAddGpClick = () => setIsAdding(true);
   const handleBackClick = () => setIsAdding(false);
@@ -27,12 +31,15 @@ const ManageGpsPage = () => {
   };
 
   const handleEditGp = (index) => {
-    // handle edit functionality here
-    navigate(`/phed/managegp/${index}`)
+    // Handle edit functionality here
+    navigate(`/phed/managegp/${index}`);
   };
+
   const handleDeleteGp = (index) => {
     setGpData(gpData.filter((_, i) => i !== index));
   };
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white overflow-x-hidden">
@@ -46,15 +53,16 @@ const ManageGpsPage = () => {
               image={Image1}
               alt="Add Gram Panchayat Illustration"
             />
-            <Form onBack={handleBackClick} onSubmit={handleSubmitForm} />
+            <Form onBack={handleBackClick} setIsAdding={setIsAdding} onSubmit={handleSubmitForm} />
           </>
         ) : (
           <>
             <List
-              data={gpData}
+              data={extractedGpList} // Pass the extracted GP names to the List component
               onAdd={handleAddGpClick}
               onEdit={handleEditGp}
               onDelete={handleDeleteGp}
+              setIsAdding={setIsAdding}
             />
             <Illustration image={Image2} alt="Water Illustration" />
           </>

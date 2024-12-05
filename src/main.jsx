@@ -44,7 +44,7 @@ const router = createBrowserRouter(
     <>
       {/* <Route path="/" element={<App />} /> */}
       {/* Profile Route */}
-      <Route path="/profile" element={<ProfilePage_PHED />} />
+      <Route path="phed/profile" element={<ProfilePage_PHED />} />
 
       {/* Public Layout Route */}
       <Route path="/" element={<Public_Layout />} />

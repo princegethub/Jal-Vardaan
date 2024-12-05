@@ -1,21 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image1 from "../../assets/PHED/addlist.png";
-import { Link, useNavigate } from "react-router-dom"; // Use correct "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"; // Use correct "react-router-dom"
+import {
+  useGpUpdateMutation,
+  useViewSingleGpDetailsQuery,
+} from "../../features/api/phedApi";
 
 function UpdateGps() {
   const navigate = useNavigate();
+  const { id } = useParams(); // Extract the ID from the URL parameters
+  console.log("id: ", id);
 
   // State to manage form values
   const [formData, setFormData] = useState({
-    gpName: "",
-    sarpanchName: "",
-    mobileNumber: "",
+    villageName: "",
+    name: "",
+    contact: "",
     lgdCode: "",
-    authId: "",
+    aadhar: "",
   });
 
   // State to manage validation errors
   const [errors, setErrors] = useState({});
+
+  // Fetch data for the specific GP using the query hook
+  const {
+    data: gpDetails,
+    isLoading,
+    isSuccess,
+    error,
+  } = useViewSingleGpDetailsQuery(id);
+
+
+
+
+
+
+  useEffect(() => {
+    if (isSuccess && gpDetails) {
+      setFormData({
+        gpName: gpDetails?.data.villageName || "",
+        sarpanchName: gpDetails?.data.name || "",
+        mobileNumber: gpDetails?.data.contact || "",
+        lgdCode: gpDetails?.data.lgdCode || "",
+        authId: gpDetails?.data.aadhar || "",
+      });
+    } else if (error) {
+      console.error("Error fetching GP details:", error);
+    }
+  }, [isSuccess, gpDetails, error]);
+
+
+
+
 
   // Handle input changes
   const handleChange = (e) => {
@@ -23,18 +60,31 @@ function UpdateGps() {
     setFormData({ ...formData, [id]: value });
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors); // Set errors if validation fails
-      return;
-    }
-    // Perform the update logic here (e.g., API call)
-    console.log("Form submitted successfully:", formData);
-    navigate("/phed/managegp"); // Redirect on successful submission
-  };
+
+  const {
+    data: gpUpdateData,
+    isLoading: isLoadingUpdate,
+    isSuccess: isSuccessUpdate,
+    error: errorUpdate,
+  } = useGpUpdateMutation();
+
+
+
+// Handle form submission
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const validationErrors = validateForm();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors); // Set errors if validation fails
+    return;
+  }
+  
+  console.log("Form data before update:", formData);
+
+  // Call the mutation with the id and formData
+  gpUpdateData({ id, updates: formData });
+};
+
 
   // Validate form fields
   const validateForm = () => {
@@ -94,9 +144,9 @@ function UpdateGps() {
                 placeholder: "Enter LGD Code",
               },
               {
-                label: "Auth ID",
+                label: "Addhar ID",
                 id: "authId",
-                placeholder: "Enter Auth ID",
+                placeholder: "Enter Addhar ID",
               },
             ].map((input) => (
               <div key={input.id}>

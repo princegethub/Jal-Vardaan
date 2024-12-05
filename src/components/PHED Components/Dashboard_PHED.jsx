@@ -10,8 +10,12 @@ import Inventory from "../../assets/Card Logo/inventory.png";
 import Annoucement from "../../assets/Card Logo/announcement 1.png";
 import Finance from "../../assets/Card Logo/finan_ico 1.png";
 import SlickSlider from "./Slider";
+import { useSelector } from 'react-redux';
 
 function Dashboard_PHED() {
+  const user = useSelector((state) => state.auth.user);
+  const isAuthenticate = useSelector((state) => state.auth.isAuthenticate);
+
   const navigate = useNavigate(); // Initialize navigate function
 
   // Services array with routes
@@ -52,6 +56,8 @@ function Dashboard_PHED() {
   const handleDashboardCard = (route) => {
     navigate(route); // Navigate to the route passed as parameter
   };
+
+  console.log("dataaa",user)
 
   return (
     <>
