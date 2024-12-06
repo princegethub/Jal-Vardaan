@@ -12,7 +12,12 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: AUTH_API,
+    prepareHeaders: (headers) => {
+      headers.set("Content-Type", "application/json");
+      return headers;
+    },
   }),
+  
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (inputData) => ({

@@ -40,15 +40,8 @@ export const phedApi = createApi({
         url: `/gp-update/${id}`,
         method: "PUT",
         body: updates,
-      }),
-      async onQueryStarted({ id, updates }, { queryFulfilled, dispatch }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(updateGp({ id, updates: data }));
-        } catch (error) {
-          console.error("Update GP error:", error);
-        }
-      },
+        credentials: "include",
+      })
     }),
 
     // New GP List Fetch Mutation

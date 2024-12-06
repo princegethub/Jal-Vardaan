@@ -35,20 +35,20 @@ function UpdateGps() {
 
 
 
-
   useEffect(() => {
     if (isSuccess && gpDetails) {
       setFormData({
-        gpName: gpDetails?.data.villageName || "",
-        sarpanchName: gpDetails?.data.name || "",
-        mobileNumber: gpDetails?.data.contact || "",
+        villageName: gpDetails?.data.villageName || "",
+        name: gpDetails?.data.name || "",
+        contact: gpDetails?.data.contact || "",
         lgdCode: gpDetails?.data.lgdCode || "",
-        authId: gpDetails?.data.aadhar || "",
+        aadhar: gpDetails?.data.aadhar || "",
       });
     } else if (error) {
       console.error("Error fetching GP details:", error);
     }
   }, [isSuccess, gpDetails, error]);
+  
 
 
 
@@ -61,46 +61,49 @@ function UpdateGps() {
   };
 
 
-  const {
-    data: gpUpdateData,
-    isLoading: isLoadingUpdate,
-    isSuccess: isSuccessUpdate,
-    error: errorUpdate,
-  } = useGpUpdateMutation();
+  const [gpUpdate, { isLoading: isUpdating, isSuccess: isUpdated, error: updateError }] = useGpUpdateMutation();
 
 
 
-// Handle form submission
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const validationErrors = validateForm();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors); // Set errors if validation fails
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({}); // Clear errors
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
   
-  console.log("Form data before update:", formData);
-
-  // Call the mutation with the id and formData
-  gpUpdateData({ id, updates: formData });
-};
+    try {
+      console.log("Form data before update:", formData);
+      console.log('{ id, updates: formData }: ', { id, updates: formData });
+  
+      // Call the mutation
+      await gpUpdate({ id, updates: formData }).unwrap();
+      console.log("GP updated successfully");
+  
+      // Navigate to the GP management page on success
+      navigate("/phed/managegp");
+    } catch (error) {
+      console.error("Error updating GP:", error);
+    }
+  };
+  
 
 
   // Validate form fields
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.gpName) newErrors.gpName = "Gram Panchayat Name is required";
-    if (!formData.sarpanchName)
-      newErrors.sarpanchName = "Sarpanch Name is required";
-    if (!formData.mobileNumber)
-      newErrors.mobileNumber = "Mobile Number is required";
-    else if (!/^\d{10}$/.test(formData.mobileNumber))
-      newErrors.mobileNumber = "Enter a valid 10-digit Mobile Number";
+    if (!formData.villageName) newErrors.villageName = "Gram Panchayat Name is required";
+    if (!formData.name) newErrors.name = "Sarpanch Name is required";
+    if (!formData.contact) newErrors.contact = "Mobile Number is required";
+    else if (!/^\d{10}$/.test(formData.contact))
+      newErrors.contact = "Enter a valid 10-digit Mobile Number";
     if (!formData.lgdCode) newErrors.lgdCode = "LGD Code is required";
-    if (!formData.authId) newErrors.authId = "Auth ID is required";
+    if (!formData.aadhar) newErrors.aadhar = "Aadhar ID is required";
     return newErrors;
   };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white overflow-x-hidden">
       <div
@@ -125,17 +128,17 @@ const handleSubmit = (e) => {
             {[
               {
                 label: "Gram Panchayat Name",
-                id: "gpName",
+                id: "villageName",
                 placeholder: "Enter Gram Panchayat name",
               },
               {
                 label: "Sarpanch Name",
-                id: "sarpanchName",
+                id: "name",
                 placeholder: "Enter Sarpanch name",
               },
               {
                 label: "Mobile Number",
-                id: "mobileNumber",
+                id: "contact",
                 placeholder: "Enter Mobile Number",
               },
               {
@@ -145,7 +148,7 @@ const handleSubmit = (e) => {
               },
               {
                 label: "Addhar ID",
-                id: "authId",
+                id: "aadhar",
                 placeholder: "Enter Addhar ID",
               },
             ].map((input) => (
