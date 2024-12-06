@@ -38,7 +38,9 @@ import ReceiptsPage from "./components/GPS Components/ReceiptsPage.jsx";
 import GPAlertPage from "./components/GPS Components/GPAlertPage.jsx";
 import RqstFundPage from "./components/GPS Components/RqstFundPage.jsx";
 import Assest_GP from "./components/GPS Components/Assest_GP.jsx";
+import Complaint_PHED from "./components/GPS Components/Complaint_PHED";
 import "./App.css"
+import RequestFundPage from "./components/PHED Components/RequestedFundPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -62,6 +64,7 @@ const router = createBrowserRouter(
         <Route path="/phed/assestinventory" element={<AssestInventory />} />
         <Route path="/phed/alerts" element={<AlertPage />} />
         <Route path="/phed/gpannouncement" element={<GpAnnouncement />} />
+        <Route path="/phed/requestedfund" element={<RequestFundPage />} />
       </Route>
 
       {/* GP Layout Route */}
@@ -73,6 +76,7 @@ const router = createBrowserRouter(
         <Route path="/gp/receipt" element={<ReceiptsPage />} />
         <Route path="/gp/aleart" element={<GPAlertPage />} />
         <Route path="/gp/requestfund" element={<RqstFundPage />} />
+        <Route path="/gp/complaint" element={<Complaint_PHED />} />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

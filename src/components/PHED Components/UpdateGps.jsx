@@ -5,6 +5,7 @@ import {
   useGpUpdateMutation,
   useViewSingleGpDetailsQuery,
 } from "../../features/api/phedApi";
+import { toast } from "sonner";
 
 function UpdateGps() {
   const navigate = useNavigate();
@@ -31,10 +32,6 @@ function UpdateGps() {
     error,
   } = useViewSingleGpDetailsQuery(id);
 
-
-
-
-
   useEffect(() => {
     if (isSuccess && gpDetails) {
       setFormData({
@@ -48,11 +45,6 @@ function UpdateGps() {
       console.error("Error fetching GP details:", error);
     }
   }, [isSuccess, gpDetails, error]);
-  
-
-
-
-
 
   // Handle input changes
   const handleChange = (e) => {
@@ -60,10 +52,10 @@ function UpdateGps() {
     setFormData({ ...formData, [id]: value });
   };
 
-
-  const [gpUpdate, { isLoading: isUpdating, isSuccess: isUpdated, error: updateError }] = useGpUpdateMutation();
-
-
+  const [
+    gpUpdate,
+    { isLoading: isUpdating, isSuccess: isUpdated, error: updateError },
+  ] = useGpUpdateMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,28 +65,26 @@ function UpdateGps() {
       setErrors(validationErrors);
       return;
     }
-  
+
     try {
-      console.log("Form data before update:", formData);
-      console.log('{ id, updates: formData }: ', { id, updates: formData });
-  
       // Call the mutation
       await gpUpdate({ id, updates: formData }).unwrap();
-      console.log("GP updated successfully");
-  
-      // Navigate to the GP management page on success
-      navigate("/phed/managegp");
+
+      if (isUpdated && !updateError) {
+        toast.success("Gp details updated successfully");
+        // Navigate to the GP management page on success
+        navigate("/phed/managegp");
+      }
     } catch (error) {
       console.error("Error updating GP:", error);
     }
   };
-  
-
 
   // Validate form fields
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.villageName) newErrors.villageName = "Gram Panchayat Name is required";
+    if (!formData.villageName)
+      newErrors.villageName = "Gram Panchayat Name is required";
     if (!formData.name) newErrors.name = "Sarpanch Name is required";
     if (!formData.contact) newErrors.contact = "Mobile Number is required";
     else if (!/^\d{10}$/.test(formData.contact))
@@ -103,7 +93,7 @@ function UpdateGps() {
     if (!formData.aadhar) newErrors.aadhar = "Aadhar ID is required";
     return newErrors;
   };
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white overflow-x-hidden">
       <div

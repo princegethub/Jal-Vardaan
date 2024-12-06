@@ -1,11 +1,19 @@
 import React from 'react';
 
-function DetailsCard({ gpName, details, viewType, onBack }) {
+function DetailsCard({ gp, details, viewType, onBack }) {
+  console.log('details: ', details);
+
+  // Check if details for the current viewType are valid
+  const hasDetails = viewType === 'Asset'
+    ? details && details.assets && details.assets.length > 0
+    : details && details.inventory && details.inventory.length > 0;
+
+  // Render content based on viewType
   return (
     <div className="w-full shadow-lg rounded-xl p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-blue-600">
-          {gpName} - {viewType} Details
+          {gp.name} - {viewType} Details
         </h2>
         <button
           onClick={onBack}
@@ -14,20 +22,42 @@ function DetailsCard({ gpName, details, viewType, onBack }) {
           Back
         </button>
       </div>
-      {/* Details Section with Scrollbar */}
-      <div className="max-h-96 overflow-y-auto custom-scrollbar"> {/* Set a max height and enable scrolling */}
-        <ul className="space-y-4">
-          {details.map((item, index) => (
-            <li
-              key={index}
-              className="bg-[#e0f2ff] text-blue-700 rounded-lg shadow p-4 hover:shadow-md transition-shadow"
-            >
-              <p className="font-semibold">{item.name}</p>
-              <p>Amount: {item.amount}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      {/* Conditional rendering for details */}
+      {hasDetails ? (
+        <div className="max-h-96 overflow-y-auto custom-scrollbar">
+          <ul className="space-y-4">
+            {viewType === 'Asset' ? (
+              details.assets.map((item, index) => (
+                <li
+                  key={index}
+                  className="bg-[#e0f2ff] text-blue-700 rounded-lg shadow p-4 hover:shadow-md transition-shadow"
+                >
+                  <p className="font-semibold">Category: {item.category}</p>
+                  <p>Description: {item.description}</p>
+                  <p>Quantity: {item.quantity}</p>
+                </li>
+              ))
+            ) : (
+              details.inventory.map((item, index) => (
+                <li
+                  key={index}
+                  className="bg-[#e0f2ff] text-blue-700 rounded-lg shadow p-4 hover:shadow-md transition-shadow"
+                >
+                  <p className="font-semibold">Category: {item.category}</p>
+                  <p>Description: {item.description}</p>
+                  <p>Quantity: {item.quantity}</p>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      ) : (
+        // Show a fallback message if no details are available
+        <div className="text-center text-gray-500">
+          <p>No {viewType.toLowerCase()} details available for this GP.</p>
+        </div>
+      )}
     </div>
   );
 }

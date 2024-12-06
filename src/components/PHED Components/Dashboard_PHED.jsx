@@ -9,6 +9,8 @@ import AlretIcon from "../../assets/Card Logo/alert icon.png";
 import Inventory from "../../assets/Card Logo/inventory.png";
 import Annoucement from "../../assets/Card Logo/announcement 1.png";
 import Finance from "../../assets/Card Logo/finan_ico 1.png";
+import HandImg from "../../assets/PHED/rqstFund.png";
+
 import SlickSlider from "./Slider";
 import { useSelector } from 'react-redux';
 
@@ -46,6 +48,11 @@ function Dashboard_PHED() {
       route: "/phed/gpannouncement", // Route for GP Announcements
     },
     {
+      text: "Requested Fund",
+      imageSrc: HandImg,
+      route: "/phed/requestedfund", // Route for GP Announcements
+    },
+    {
       text: "Financial Overview",
       imageSrc: Finance,
       route: "/phed/finance", // Route for Financial Overview
@@ -63,7 +70,7 @@ function Dashboard_PHED() {
     <>
       <SlickSlider />
       <div className="h-auto bg-gradient-to-b from-[#4EB4F8] to-[#FFFFFF] py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 px-4 sm:px-8 lg:px-16">
           {services.map((service, index) => (
             <Card
               key={index}

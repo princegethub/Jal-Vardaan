@@ -15,9 +15,9 @@ const ListCard = ({ gps, onSelect }) => {
             >
               <div className="flex items-center space-x-3">
                 <div className="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">
-                  A
+                {gp.name.charAt(0)}
                 </div>
-                <span className="text-lg">{gp}</span>
+                <span className="text-lg">{gp.name}</span>
               </div>
               <button
                 onClick={() => onSelect(gp)} // Trigger the selection callback

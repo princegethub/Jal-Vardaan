@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { addGp, updateGp } from "../phedSlice";
 
-const PHED_API = "http://localhost:5000/api/v1/phed"; // Replace with your API endpoint
+const PHED_API = "http://localhost:5000/api/v1/phed";
 
 export const phedApi = createApi({
   reducerPath: "phedApi",
@@ -40,40 +40,76 @@ export const phedApi = createApi({
         url: `/gp-update/${id}`,
         method: "PUT",
         body: updates,
-        credentials: "include",
-      })
+      }),
     }),
-
-    // New GP List Fetch Mutation
+    // Fetch GP List Query
     gpListFetch: builder.query({
       query: () => ({
         url: "/gplist",
         method: "GET",
       }),
-      async onQueryStarted(args, { queryFulfilled, dispatch }) {
-        try {
-          const { data } = await queryFulfilled;
-          // You can add any additional dispatches here if needed, e.g., updating the Redux state
-        } catch (error) {
-          console.error("Fetch GP list error:", error);
-        }
-      },
     }),
-    // New GP List Fetch Mutation
-    // In phedApi.js
+    // Delete GP Mutation
+    gpDelete: builder.mutation({
+      query: (id) => ({
+        url: `gp-delete/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    // View Single GP Details Query
     viewSingleGpDetails: builder.query({
       query: (id) => ({
         url: `gp-details/${id}`,
         method: "GET",
       }),
-      async onQueryStarted(args, { queryFulfilled, dispatch }) {
-        try {
-          const { data } = await queryFulfilled;
-          // Add any additional logic if needed
-        } catch (error) {
-          console.error("Fetch GP Details list error:", error);
-        }
-      },
+    }),
+    // View Announcement List Query
+    viewAnnouncementList: builder.query({
+      query: () => ({
+        url: "/announcement",
+        method: "GET",
+      }),
+    }),
+    // Create PHED Announcement Mutation
+    createPhedAnnouncement: builder.mutation({
+      query: (announcementData) => ({
+        url: "/announcement-create",
+        method: "POST",
+        body: announcementData,
+      }),
+    }),
+
+    // Create PHED Announcement Mutation
+    createAsset: builder.mutation({
+      query: (inputData) => ({
+        url: "/asset",
+        method: "POST",
+        body: inputData,
+      }),
+    }),
+    // Create PHED Announcement Mutation
+    createInventory: builder.mutation({
+      query: (inputData) => ({
+        url: "/inventory",
+        method: "POST",
+        body: inputData,
+      }),
+    }),
+
+    // View Single GP Details Query
+    viewSingleGpAsset: builder.query({
+      query: (id) => ({
+        url: `/asset/${id}`,
+        method: "GET",
+      }),
+    }),
+
+    // View Single GP Details Query
+    viewSingleGpInventory: builder.query({
+      query: (id) => ({
+        url: `/inventory/${id}`,
+        method: "GET",
+      }),
     }),
   }),
 });
@@ -84,4 +120,11 @@ export const {
   useGpUpdateMutation,
   useGpListFetchQuery,
   useViewSingleGpDetailsQuery,
+  useGpDeleteMutation,
+  useCreatePhedAnnouncementMutation,
+  useViewAnnouncementListQuery,
+  useCreateAssetMutation,
+  useCreateInventoryMutation,
+  useViewSingleGpAssetQuery,
+  useViewSingleGpInventoryQuery,
 } = phedApi;

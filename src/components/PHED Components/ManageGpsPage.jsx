@@ -9,17 +9,16 @@ import { useNavigate } from "react-router";
 import { useGpListFetchQuery } from "../../features/api/phedApi";
 
 const ManageGpsPage = () => {
-  const { data: gpList, error, isLoading } = useGpListFetchQuery();
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
-
+  
+  const { data: gpList, error, isLoading } = useGpListFetchQuery();
   
 
   // Extract names from gpList data and store them in a separate array
 
   const extractedGpList = gpList?.data?.map((gp) => gp) || [];
 
-  console.log('extractedGpList: ', extractedGpList);
 
  
 
@@ -34,6 +33,7 @@ const ManageGpsPage = () => {
     // Handle edit functionality here
     navigate(`/phed/managegp/${index}`);
   };
+  
 
   const handleDeleteGp = (index) => {
     setGpData(gpData.filter((_, i) => i !== index));

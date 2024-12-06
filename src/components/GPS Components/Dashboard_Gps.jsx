@@ -33,9 +33,14 @@ function Dashboard_Gps() {
       route: "/gp/assest", // Route for Asset Inventory
     },
     {
-      text: "Push Notification",
+      text: "Create Announcement",
       imageSrc: PushNotification,
       route: "/gp/notification", // Route for Asset Inventory
+    },
+    {
+      text: "Complaint PHED",
+      imageSrc: PushNotification,
+      route: "/gp/complaint", // Route for Asset Inventory
     },
     // {
     //   text: "Payment",
