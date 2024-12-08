@@ -111,6 +111,65 @@ export const phedApi = createApi({
         method: "GET",
       }),
     }),
+
+    // View Single GP Details Query
+    alreatPhed: builder.query({
+      query: () => ({
+        url: `/alerts`,
+        method: "GET",
+      }),
+    }),
+    // View Single GP Details Query
+    fundRequestedPhed: builder.query({
+      query: () => ({
+        url: `/fund/requests`,
+        method: "GET",
+      }),
+    }),
+
+    StatusCompleteFundRqstPhed: builder.mutation({
+      query: (id) => ({
+        url: `/fund/requests/${id}`,
+        method: "PATCH",
+      }),
+    }),
+
+    // Inside your RTK Query Slice
+    StatusCompletealreatPhed: builder.mutation({
+      query: (id) => ({
+        url: `/alert/${id}`,
+        method: "PATCH",
+      }),
+    }),
+
+
+    assestOverviewPHeD: builder.query({
+      query: () => ({
+        url: `/assets/overview`,
+        method: "GET",
+      }),
+    }),
+
+    invenotoryOverviewPHeD: builder.query({
+      query: () => ({
+        url: `/inventory-overview`,
+        method: "GET",
+      }),
+    }),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }),
 });
 
@@ -127,4 +186,11 @@ export const {
   useCreateInventoryMutation,
   useViewSingleGpAssetQuery,
   useViewSingleGpInventoryQuery,
+  useAlreatPhedQuery,
+  useStatusCompletealreatPhedMutation,
+  useFundRequestedPhedQuery,
+  useStatusCompleteFundRqstPhedMutation,
+  useAssestOverviewPHeDQuery,
+  useInvenotoryOverviewPHeDQuery,
+  
 } = phedApi;

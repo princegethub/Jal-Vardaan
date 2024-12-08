@@ -1,113 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AlertListCard from "./AlertListCard";
 import AlertDetailsDialog from "./AlertDetailsDialog";
 import HandImg from "../../assets/PHED/Hand.png";
 import "../../App.css";
+import { useAlreatPhedQuery, useStatusCompletealreatPhedMutation } from "@/features/api/phedApi";
+import { toast } from "sonner";
 
 function AlertPage() {
   const [selectedAlert, setSelectedAlert] = useState(null); // State to track the currently selected alert
+  const { data, isLoading: listLoading, isError: listError, error } = useAlreatPhedQuery();
+  const [alerts, setAlerts] = useState([]);
 
-  // Hardcoded sample data to replace API call for now
-  const [alerts, setAlerts] = useState([
-    {
-      id: 1,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message:
-        "The chlorine level is critically low. Please refill immediately.",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message:
-        "The hydrogen peroxide level needs attention. Please refill within 24 hours.",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Inventory supplies for filters are running out. Restock soon.",
-      status: "Pending",
-    },
-    {
-      id: 4,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message:
-        "Critical levels detected in the chemical storage. Immediate action required.",
-      status: "Pending",
-    },
-    {
-      id: 5,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "The filter supplies are at low levels. Restock soon.",
-      status: "Pending",
-    },
-    {
-      id: 6,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message:
-        "Immediate restocking of chlorine is necessary to avoid system shutdown.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-    {
-      id: 7,
-      gpName: "GP - Dugri",
-      alertCategory: "Low Inventory",
-      message: "Hydrogen peroxide levels critically low. Refill needed.",
-      status: "Pending",
-    },
-  ]);
+  const [statusCompletealreatPhed] = useStatusCompletealreatPhedMutation();
+
+  useEffect(() => {
+    if (data) {
+      setAlerts(data.data);
+      toast.success(data.message);
+    }
+    if (listError) {
+      console.error("Failed to fetch announcements:", error);
+      toast.error("Error fetching announcements");
+    }
+  }, [data, listError, error]);
 
   // Function to handle acknowledging an alert
-  const handleAcknowledge = (alertId) => {
-    // Update the status of the acknowledged alert
-    setAlerts((prevAlerts) =>
-      prevAlerts.map((alert) =>
-        alert.id === alertId ? { ...alert, status: "Completed" } : alert
-      )
-    );
-    setSelectedAlert(null); // Close the dialog after acknowledgment
+  const handleAcknowledge = async (alertId) => {
+    try {
+      await statusCompletealreatPhed(alertId).unwrap();
+      // Update the status of the acknowledged alert locally
+     
+      toast.success("Alert acknowledged successfully!");
+      setSelectedAlert(null); // Close the dialog after acknowledgment
+    } catch (error) {
+      console.error("Error acknowledging alert:", error);
+      toast.error("Failed to acknowledge alert.");
+    }
   };
 
   return (

@@ -1,30 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RqstListIllustration from "../../assets/GPS/RqstList-illustration.png";
 import RqstFormIllustration from "../../assets/GPS/RqstForm-illustration.png";
+import {
+  useCreateGpFundRequestMutation,
+  useGpFundRequestQuery,
+} from "@/features/api/gpApi";
+import { toast } from "sonner";
 
 const RqstFundPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [notifications, setNotifications] = useState([
-    {
-      category: "Households",
-      amount: 5000,
-      description: "Repair work in Sector 21.",
-      date: "08-04-2024",
-    },
-    {
-      category: "Schools",
-      amount: 2000,
-      description: "Testing water quality in schools.",
-      date: "09-04-2024",
-    },
-  ]); // Initial notifications history
+  const [notifications, setNotifications] = useState([]);
 
   const [formData, setFormData] = useState({
+    phedId: "",
     category: "",
     amount: "",
     description: "",
   });
+
+  const { data, isSuccess, isError, isLoading, error } =
+    useGpFundRequestQuery();
+  const [
+    createGpFundRequest,
+    { isSuccess: addIsSuccess, isError: addIsError, isLoading: addIsLoading },
+  ] = useCreateGpFundRequestMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setNotifications(data.fundRequests); // Assuming `data.data` holds the fund requests array
+    }
+    if (isError) {
+      toast.error(error?.message || "Error fetching fund requests");
+    }
+  }, [data, isSuccess, isError, error]);
 
   const toggleView = () => {
     setIsFormVisible((prev) => !prev);
@@ -35,15 +44,16 @@ const RqstFundPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const newNotification = {
-      ...formData,
-      date: new Date().toLocaleDateString(), // Add current date
-    };
-    setNotifications((prev) => [newNotification, ...prev]); // Add new request to history
-    setIsPopupVisible(true); // Show the popup message
-    setFormData({ category: "", amount: "", description: "" }); // Clear form fields
+    try {
+      await createGpFundRequest(formData).unwrap();
+      toast.success("Fund request added successfully!");
+      setFormData({ phedId: "", category: "", amount: "", description: "" }); // Clear form fields
+      setIsPopupVisible(true); // Show the popup message
+    } catch (error) {
+      toast.error("Error adding fund request");
+    }
   };
 
   const closePopup = () => {
@@ -51,36 +61,51 @@ const RqstFundPage = () => {
     setIsFormVisible(false); // Return to notification list view
   };
 
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className="flex flex-col lg:flex-row bg-gradient-to-b from-blue-400 via-white to-white shadow-lg py-8 h-auto">
       <div className="w-[90vw] flex flex-col sm:flex-row gap-8 mx-auto sm:w-[80vw]">
         {/* Left Section */}
         <div className="w-full sm:w-[90%] lg:w-1/2 rounded-lg flex justify-center bg-gradient-to-b from-blue-400 to-blue-200 items-center p-6 shadow-xl">
           {isFormVisible ? (
-             <div className="flex justify-center items-center w-full h-full">
-             <p className="block sm:hidden text-center text-gray-800 text-xl font-bold">
-               Request Fund
-             </p>
-             <img
-               src={RqstFormIllustration}
-               alt="form Illustration"
-               className="hidden sm:block w-[400px] h-auto"
-             />
-           </div>
+            <div className="flex justify-center items-center w-full h-full">
+              <p className="block sm:hidden text-center text-gray-800 text-xl font-bold">
+                Request Fund
+              </p>
+              <img
+                src={RqstFormIllustration}
+                alt="form Illustration"
+                className="hidden sm:block w-[400px] h-auto"
+              />
+            </div>
           ) : (
             <div className="space-y-4 w-full">
-              <h2 className="text-xl font-bold text-blue-600">Request History</h2>
+              <h2 className="text-xl font-bold text-blue-600">
+                Request History
+              </h2>
               {/* Scrollable list */}
-              <ul className="space-y-4 overflow-y-auto max-h-[300px] pr-2">
-                {notifications.map((item, index) => (
+              <ul className="space-y-4 overflow-y-auto max-h-[300px] pr-2 rounded">
+                {notifications?.map((item, index) => (
                   <li
-                    key={index}
-                    className="p-4 bg-white rounded shadow-lg border border-gray-200"
+                    key={item._id}
+                    className={`p-4 rounded shadow-lg border border-gray-200 ${
+                      item.status === "Pending" ? "bg-red-100" : "bg-green-100"
+                    }`}
                   >
                     <p className="font-bold">{`Category: ${item.category}`}</p>
-                    <p className="text-sm">{`Date: ${item.date}`}</p>
+                    <p className="text-sm">{`Date: ${new Date(
+                      item.createdAt
+                    ).toLocaleDateString()}`}</p>
                     <p>{`Requested Amount: ₹${item.amount}`}</p>
                     <p>{`Description: ${item.description}`}</p>
+                    <p
+                      className={`text-sm ${
+                        item.status === "Pending"
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >{`Status: ${item.status}`}</p>
                   </li>
                 ))}
               </ul>
@@ -105,6 +130,17 @@ const RqstFundPage = () => {
                 Request Fund to PHED
               </h2>
               <div>
+                <label className="block font-bold mb-2">PHED ID:</label>
+                <input
+                  type="text"
+                  name="phedId"
+                  value={formData.phedId}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-300 rounded p-2"
+                  required
+                />
+              </div>
+              <div>
                 <label className="block font-bold mb-2">Category:</label>
                 <select
                   name="category"
@@ -121,7 +157,9 @@ const RqstFundPage = () => {
                 </select>
               </div>
               <div>
-                <label className="block font-bold mb-2">Requested Amount:</label>
+                <label className="block font-bold mb-2">
+                  Requested Amount:
+                </label>
                 <input
                   type="number"
                   name="amount"
@@ -160,15 +198,15 @@ const RqstFundPage = () => {
             </form>
           ) : (
             <div className="flex justify-center items-center w-full h-full">
-            <p className="block sm:hidden text-center text-gray-800 text-xl font-bold">
-              Request Fund
-            </p>
-            <img
-              src={RqstListIllustration}
-              alt="List Illustration"
-              className="hidden sm:block w-[400px] h-auto"
-            />
-          </div>
+              <p className="block sm:hidden text-center text-gray-800 text-xl font-bold">
+                Request Fund
+              </p>
+              <img
+                src={RqstListIllustration}
+                alt="List Illustration"
+                className="hidden sm:block w-[400px] h-auto"
+              />
+            </div>
           )}
         </div>
       </div>

@@ -28,7 +28,7 @@ function Dashboard_PHED() {
       route: "/phed/managegp", // Route for Manage GPs
     },
     {
-      text: "Asset Overview",
+      text: "Asset Inventory",
       imageSrc: Asset,
       route: "/phed/assestinventory", // Route for Asset Inventory
     },
@@ -38,9 +38,9 @@ function Dashboard_PHED() {
       route: "/phed/alerts", // Route for Alerts
     },
     {
-      text: "Inventory Overview",
+      text: "AssetInventory Overview",
       imageSrc: Inventory,
-      route: "/phed/assestinventory", // Route for Inventory
+      route: "/phed/assestinventoryoverview", // Route for Inventory
     },
     {
       text: "Add Announcement for GP",

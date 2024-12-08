@@ -106,9 +106,41 @@ export const gpApi = createApi({
 
 
 
-
-
-
+    gpFundRequest: builder.query({
+      query: () => ({
+        url: "/fund/requests", // Correct API endpoint
+        method: "GET",
+        // Sending data in the request body
+      }),
+    }),
+    
+    
+    createGpFundRequest: builder.mutation({
+      query: (inputData) => ({
+        url: "/fund/request", // Correct API endpoint
+        method: "POST",
+        body: inputData, // Sending data in the request body
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled; // Wait for the query to succeed
+          dispatch(addGp(data)); // Dispatching an action to update the state
+          console.log("Consumer added successfully:", data);
+        } catch (error) {
+          console.error("Error in creating consumer:", error);
+        }
+      },
+    }),
+    
+    
+    
+    getNotificationPhed: builder.query({
+      query: () => ({
+        url: "/notifications", // Correct API endpoint
+        method: "GET",
+        // Sending data in the request body
+      }),
+    }),
 
   }),
 });
@@ -120,5 +152,8 @@ export const {
   useAddGpComplaintMutation,
   useGetGpComplaintListQuery,
   useGetGpAnnouncmentListQuery,
-  useAddGpAnnoucementMutation
+  useAddGpAnnoucementMutation,
+  useGpFundRequestQuery,
+  useCreateGpFundRequestMutation,
+  useGetNotificationPhedQuery,
 } = gpApi;

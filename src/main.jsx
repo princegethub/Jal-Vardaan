@@ -41,6 +41,7 @@ import Assest_GP from "./components/GPS Components/Assest_GP.jsx";
 import Complaint_PHED from "./components/GPS Components/Complaint_PHED";
 import "./App.css"
 import RequestFundPage from "./components/PHED Components/RequestedFundPage";
+import AssestOverview from "./components/PHED Components/AsseetInvenotryOverview";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -62,6 +63,7 @@ const router = createBrowserRouter(
         <Route path="/phed/managegp" element={<ManageGpsPage />} />
         <Route path="/phed/managegp/:id" element={<UpdateGps />} />
         <Route path="/phed/assestinventory" element={<AssestInventory />} />
+        <Route path="/phed/assestinventoryoverview" element={<AssestOverview/>} />
         <Route path="/phed/alerts" element={<AlertPage />} />
         <Route path="/phed/gpannouncement" element={<GpAnnouncement />} />
         <Route path="/phed/requestedfund" element={<RequestFundPage />} />

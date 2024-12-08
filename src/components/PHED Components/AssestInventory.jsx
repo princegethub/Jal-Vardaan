@@ -3,13 +3,16 @@ import ListCard from "../ListCard";
 import DetailsCard from "../DetailsCard";
 import FormDialogAssetInventory from "../FormDilogAssetInvenotry"; // Import the new component
 import {
+  useAssestOverviewPHeDQuery,
   useCreateAssetMutation,
   useCreateInventoryMutation,
   useGpListFetchQuery,
+  useInvenotoryOverviewPHeDQuery,
   useViewSingleGpAssetQuery,
   useViewSingleGpInventoryQuery,
 } from "@/features/api/phedApi";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 function AssestInventory() {
   // Track which GP is selected
@@ -26,12 +29,16 @@ function AssestInventory() {
   const [inventoryDetails , setInventoryDetails] = useState(null);
 
 
+  const navigate = useNavigate();
+  
 
 
   // Handle switching between Asset and Inventory views
   const toggleView = () => {
     setIsAssetView(!isAssetView); // Toggle between Asset and Inventory
   };
+
+
 
   // Fetching assets for the active GP
   const {
@@ -84,6 +91,10 @@ function AssestInventory() {
     setFormData(null); // Reset form data for "Add"
     setIsDialogOpen(true);
   };
+
+  const handleHistoryClick = ()=>{
+    navigate("/phed/assestinventoryoverview")
+  }
 
   ////Here api Call;
   const { data: gpList, error, isLoading } = useGpListFetchQuery();
@@ -182,7 +193,9 @@ function AssestInventory() {
               {isAssetView ? "Add Asset" : "Add Inventory"}
             </button>
 
-            <button className="bg-transparent border-2 border-black text-black py-2 px-3 text-sm md:text-base rounded-full shadow-lg hover:bg-black hover:text-white transition-all">
+            <button 
+            onClick={handleHistoryClick}
+            className="bg-transparent border-2 border-black text-black py-2 px-3 text-sm md:text-base rounded-full shadow-lg hover:bg-black hover:text-white transition-all">
               Your History
             </button>
           </div>
